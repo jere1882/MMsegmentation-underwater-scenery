@@ -1,7 +1,6 @@
 from mmseg.registry import DATASETS
 from .basesegdataset import BaseSegDataset
 
-
 @DATASETS.register_module()
 class UnderwaterScenery(BaseSegDataset):
     """UnderwaterScenery dataset.
@@ -10,11 +9,12 @@ class UnderwaterScenery(BaseSegDataset):
         classes=(
             'sea_floor_and_rocks', \
             'divers', \
-            'vegetation', \
             'wrecks_and_ruins', \
-            'robots', \
+            'vegetation', \
+            'fish_and_vertebrates', \
             'reefs_and_invertebrates', \
-            'fish_and_vertebrates'),
+            'robots',
+            'background'),
         palette=[ \
             [255, 255, 255],
             [0, 0, 255],
@@ -22,7 +22,8 @@ class UnderwaterScenery(BaseSegDataset):
             [0, 255, 0],
             [255, 255, 0],
             [255, 0, 255],
-            [255, 0, 0]])
+            [255, 0, 0],
+            [0,0,0]])
 
     def __init__(self,
                  img_suffix='.jpg',

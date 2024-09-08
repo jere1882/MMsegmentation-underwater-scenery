@@ -126,6 +126,11 @@ class LoadAnnotations(MMCV_LoadAnnotations):
         results['gt_seg_map'] = gt_semantic_seg
         results['seg_fields'].append('gt_seg_map')
 
+        #print("Loaded seg has size ", gt_semantic_seg.shape)
+        #print("path is ", results['seg_map_path'])
+        #print(gt_semantic_seg)
+        #assert(False)
+
     def __repr__(self) -> str:
         repr_str = self.__class__.__name__
         repr_str += f'(reduce_zero_label={self.reduce_zero_label}, '

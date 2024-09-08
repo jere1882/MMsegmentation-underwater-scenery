@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'UnderwaterScenery'
-data_root = 'data/underwater_scenery'
+data_root = 'data/underwater_scenery_double'
 crop_size = (512, 1024)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -61,7 +61,17 @@ val_dataloader = dict(
         data_prefix=dict(
             img_path='val/images', seg_map_path='val/masks'),
         pipeline=test_pipeline))
-test_dataloader = val_dataloader
+test_dataloader = dict(
+    batch_size=1,
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(type='DefaultSampler', shuffle=False),
+    dataset=dict(
+        type=dataset_type,
+        data_root=data_root,
+        data_prefix=dict(
+            img_path='porcupine_test/images', seg_map_path='porcupine_test/masks'),
+        pipeline=test_pipeline))
 
 val_evaluator = dict(type='IoUMetric', iou_metrics=['mIoU'])
 test_evaluator = val_evaluator

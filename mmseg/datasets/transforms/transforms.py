@@ -304,6 +304,8 @@ class RandomCrop(BaseTransform):
 
         crop_y1, crop_y2, crop_x1, crop_x2 = crop_bbox
         img = img[crop_y1:crop_y2, crop_x1:crop_x2, ...]
+        #print("crop", img.shape)
+        #assert(False)
         return img
 
     def transform(self, results: dict) -> dict:

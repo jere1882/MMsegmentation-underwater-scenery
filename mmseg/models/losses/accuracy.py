@@ -46,6 +46,7 @@ def accuracy(pred, target, topk=1, thresh=None, ignore_index=None):
         # Only prediction values larger than thresh are counted as correct
         correct = correct & (pred_value > thresh).t()
     if ignore_index is not None:
+        mask = target!=ignore_index
         correct = correct[:, target != ignore_index]
     res = []
     eps = torch.finfo(torch.float32).eps

@@ -19,7 +19,7 @@ def parse_args():
     return args
 
 color2index = {
-    (255, 255, 255) : 255,  #255
+    (255, 255, 255) : 7, #255
     (0,     0,   0) : 0, # 0
     (0,     0, 255) : 1,  #29
     (0,   255, 255) : 2,  #178 o 179
@@ -36,8 +36,8 @@ def main():
 
     out_dir = args.out_dir or dataset_path
 
-    train_annotations = [ out_dir+'train/masks/'+fn for fn in os.listdir(os.path.join(out_dir, 'train/masks')) ]
-    val_annotations = [ out_dir+'val/masks/'+fn for fn in os.listdir(os.path.join(out_dir, 'val/masks')) ]
+    train_annotations = [ out_dir+'/'+fn for fn in os.listdir(out_dir) ]
+    val_annotations = []#[ out_dir+'val/masks/'+fn for fn in os.listdir(os.path.join(out_dir, 'val/masks')) ]
 
     all_annotations = train_annotations + val_annotations
 
@@ -48,7 +48,7 @@ def main():
             image = cv2.imread(img, cv2.IMREAD_COLOR)
 
             lut = np.ones(256, dtype=np.uint8) * 255
-            lut[[255,29,179,150,226,105,76]] = np.arange(7, dtype=np.uint8)
+            lut[[255,29,179,150,226,105,76,0]] = np.arange(8, dtype=np.uint8)
             im_out = cv2.LUT(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY), lut)
             cv2.imwrite(new_path, im_out)
 

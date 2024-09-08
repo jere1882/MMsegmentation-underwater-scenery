@@ -634,6 +634,9 @@ class SwinTransformer(BaseModule):
             layer_name = f'norm{i}'
             self.add_module(layer_name, layer)
 
+    total_params = sum(p.numel() for p in self.parameters())
+    print(f"Number of parameters: {total_params}")
+
     def train(self, mode=True):
         """Convert the model into training mode while keep layers freezed."""
         super().train(mode)

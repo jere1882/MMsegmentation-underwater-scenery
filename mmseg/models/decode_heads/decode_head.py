@@ -286,6 +286,11 @@ class BaseDecodeHead(BaseModule, metaclass=ABCMeta):
         gt_semantic_segs = [
             data_sample.gt_sem_seg.data for data_sample in batch_data_samples
         ]
+        
+        #print("stack batch gt")
+        #for gt in gt_semantic_segs:
+        #    print(gt.shape)
+
         return torch.stack(gt_semantic_segs, dim=0)
 
     def loss_by_feat(self, seg_logits: Tensor,
@@ -332,7 +337,8 @@ class BaseDecodeHead(BaseModule, metaclass=ABCMeta):
                     seg_label,
                     weight=seg_weight,
                     ignore_index=self.ignore_index)
-
+        
+        
         loss['acc_seg'] = accuracy(
             seg_logits, seg_label, ignore_index=self.ignore_index)
         return loss

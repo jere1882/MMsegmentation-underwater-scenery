@@ -103,7 +103,7 @@ class SegLocalVisualizer(Visualizer):
                       sem_seg: PixelData,
                       classes: Optional[List],
                       palette: Optional[List],
-                      with_labels: Optional[bool] = True) -> np.ndarray:
+                      with_labels: Optional[bool] = False) -> np.ndarray:
         """Draw semantic seg of GT or prediction.
 
         Args:
@@ -139,6 +139,7 @@ class SegLocalVisualizer(Visualizer):
         for label, color in zip(labels, colors):
             mask[sem_seg[0] == label, :] = color
 
+        '''
         if with_labels:
             font = cv2.FONT_HERSHEY_SIMPLEX
             # (0,1] to change the size of the text relative to the image
@@ -176,6 +177,7 @@ class SegLocalVisualizer(Visualizer):
                 mask = cv2.putText(mask, text, (loc[0], loc[1] + label_height),
                                    font, fontScale, fontColor, thickness,
                                    lineType)
+        '''
         color_seg = (image * (1 - self.alpha) + mask * self.alpha).astype(
             np.uint8)
         self.set_image(color_seg)
@@ -299,7 +301,8 @@ class SegLocalVisualizer(Visualizer):
 
         gt_img_data = None
         pred_img_data = None
-
+        
+        draw_gt = False
         if draw_gt and data_sample is not None:
             if 'gt_sem_seg' in data_sample:
                 assert classes is not None, 'class information is ' \

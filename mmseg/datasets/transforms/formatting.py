@@ -1,3 +1,4 @@
+
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
 
@@ -85,7 +86,8 @@ class PackSegInputs(BaseTransform):
                 data = to_tensor(results['gt_seg_map'].astype(np.int64))
             gt_sem_seg_data = dict(data=data)
             data_sample.gt_sem_seg = PixelData(**gt_sem_seg_data)
-
+            #print("PackSegInputs :", data_sample.gt_sem_seg.data.shape)
+ 
         if 'gt_edge_map' in results:
             gt_edge_data = dict(
                 data=to_tensor(results['gt_edge_map'][None,
