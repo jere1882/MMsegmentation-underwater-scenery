@@ -54,6 +54,28 @@ English | [简体中文](README_zh-CN.md)
     <img src="https://user-images.githubusercontent.com/25839884/219026120-ba71e48b-6e94-4bd4-b4e9-b7d175b5e362.png" width="3%" alt="" /></a>
 </div>
 
+
+## Preamble
+
+This is a modified version of MMSegmentation to train and evaluate semantic segmentation models on the task of underwater scenery segmentation. The details of the experiments and results are available at [my website](https://www.jeremias-rodriguez.com/blog/semantic-segmentation-of-underwater-scenery). Demo videos available in the website as well.
+
+![demo image2](resources/underwater_segmentation.webp)
+
+The relevant files are:
+
+* mmsegmentation/tools/dataset_converters/underwater_scenery.py : Tools to convert the datasets to the format expected by mmsegmentation.
+* mmsegmentation/mmseg/datasets/underwater_scenery.py : The dataset class newly defined for the new task
+* mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_4xb2-160k_underwater-scenery-512x1024.py and mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_4xb2-160k_underwater-scenery-512x512.py : Base config files for the datasets
+
+The config files of the experiments are:
+
+* mmsegmentation/configs/upernet/upernet_r101_4xb4-160k_underwater_scenery-512x512.py (and other in this folder)
+* mmsegmentation/configs/swin/swin-large-patch4-window12-in22k-384x384-pre_upernet_8xb2-160k_underwater_scenery-512x512.py (and others in this folder)
+* mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_4xb2-160k_underwater-scenery-512x1024.py 
+* mmsegmentation/configs/pspnet/pspnet_r50-d8_4xb4-160k_underwater-scenery-512x1024.py
+
+The rest of this README describes MMSegmentation, regardless of my changes.
+
 ## Introduction
 
 MMSegmentation is an open source semantic segmentation toolbox based on PyTorch.
